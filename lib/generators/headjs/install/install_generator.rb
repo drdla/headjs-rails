@@ -27,7 +27,7 @@ module Headjs
         say_status("warning", "could not find Head JS (#{options.version})", :yellow)
         say_status("warning", headjs_url(options.version, 'head.js'), :yellow)
         say_status("warning", headjs_url(options.version, 'head.min.js'), :yellow)
-        
+
         if @@default_version != options.version
           say_status("fetching", "Head JS (#{@@default_version})", :green)
           get_headjs(@@default_version)
@@ -41,7 +41,7 @@ module Headjs
           get headjs_url(version, js), "public/javascripts/#{js}"
         end
       end
-      
+
       def headjs_url(version, file)
         @@dist_url.gsub("{version}", version).gsub("{file}", file)
       end

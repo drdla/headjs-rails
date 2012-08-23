@@ -16,4 +16,3 @@ require 'shoulda'
 require 'rails/test_help'
 require 'rails/generators'
 require 'headjs-rails'
-
