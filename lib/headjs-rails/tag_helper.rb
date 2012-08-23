@@ -8,31 +8,24 @@ module Headjs
       end
     end
 
-    private
+      private
 
-    def process_javascripts_to_load(*javascripts)
-      keys = []
+      def process_javascripts_to_load(*javascripts)
+        keys = []
 
-      "#{javascript_include_tag(*javascripts).scan(/src="([^"]+)"/).flatten.map { |src|
-        key = URI.parse(src).path[%r{[^/]+\z}].gsub(/\.js$/, '').gsub(/\.min$/, '').gsub(/\_min$/, '')
-        while keys.include? key do
-          key += '_' + key
-        end
-        keys << key
-        "{ '#{key}': '#{src}' }"
-      }.join(', ')}"
-
-      # javascript_include_tag(*javascripts)
-      # .scan(/src="([^"]+)"/)
-      # .flatten
-      # .map { |src|
-      #   key = URI.parse(src).path[%r{[^/]+\z}].gsub(/\.js$/, '').gsub(/\.min$/, '').gsub(/\_min$/, '')
-      #   while keys.include? key { key += '_' + key }
-      #   keys << key
-      #   "{ '#{key}': '#{src}' }"
-      # }
-      # .join(',')
-    end
+        javascript_include_tag(*javascripts)
+        .scan(/src="([^"]+)"/)
+        .flatten
+        .map { |src|
+          key = URI.parse(src).path[%r{[^/]+\z}].gsub(/\.js$/, '').gsub(/\.min$/, '').gsub(/\_min$/, '')
+          while keys.include? key do
+            key += '_' + key
+          end
+          keys << key
+          "{ '#{key}': '#{src}' }"
+        }
+        .join(',')
+      end
 
   end
 
